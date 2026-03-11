@@ -126,5 +126,3 @@ The architectural decisions — including the voiceless arbiter, the safety-firs
 A parallel governance system built on the same principles, applied to a complex rules domain rather than project management, is documented separately.
 
 ---
-# AI_Coucil
-# AI_Coucil
