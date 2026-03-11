@@ -1,0 +1,81 @@
+MINIMAL EXCHANGE FORMAT v1.2
+Governance Layer: Infrastructure (Subordinate to Kernel)
+Supersedes: Minimal Exchange Format v1.1
+
+Purpose
+The Minimal Exchange Format defines a structured, explicit, and transport-agnostic method for transferring information between personalities, governance voices, sessions, and instances.
+It eliminates reliance on conversational history and implicit memory, and supports efficient multi-voice deliberation via explicit Seen/Unseen tracking.
+
+Design Principles
+- Explicit over implicit
+- Portable over conversational
+- Attributable over blended
+- Partial but declared over complete but inferred
+- Mutually observable deliberation over isolated logs
+- Auditable read-tracking over hidden cursors
+
+Exchange Packet Structure
+
+An exchange packet consists of the following ordered sections.
+No required section may be omitted without explicit declaration.
+
+A. Event Stream (Required)
+Each entry must include:
+- Entry ID
+- Entry Type (UserInput | PersonalityOutput | GovernanceVoiceOutput | ArbitrationEvent)
+- Source (name and version)
+- Timestamp (optional)
+- Payload
+
+Entries are immutable once created.
+
+B. Context Block (Required)
+Includes:
+- Problem statement
+- Scope boundaries
+- Known constraints
+- Known unknowns
+No assumptions permitted.
+
+C. State Block (Required)
+Includes:
+- Declared assumptions (confirmed or provisional)
+- Fixed decisions
+- Immutable constraints
+
+D. Personality Output Block (Conditional)
+Exactly one personality per block.
+Labeled with personality name and version.
+
+E. Governance Voice Block (Conditional)
+Required when a governance voice is active.
+Includes voice name and version.
+
+Mutual Observability Fields (Required):
+- Observed Inputs (by Entry ID)
+- Inter-Voice Responses
+
+No decisions permitted.
+
+F. Seen Map (Required in Multi-Voice Deliberation)
+Per-voice last seen Entry ID.
+
+G. Seen Cursor Acknowledgement (Required for Voice Outputs)
+"Seen Through Entry ID: X"
+
+H. Open Items Block (Required)
+Unresolved decisions, blockers, arbitration needs.
+If empty: "No open items."
+
+Exchange Rules
+- No unstated context
+- No blended outputs
+- No inferred decisions
+- Seen/Unseen metadata mandatory where applicable
+
+Invalid Exchange Conditions
+- Implicit assumptions
+- Missing attribution
+- Missing or inconsistent Seen/Unseen metadata
+
+End of Minimal Exchange Format v1.2

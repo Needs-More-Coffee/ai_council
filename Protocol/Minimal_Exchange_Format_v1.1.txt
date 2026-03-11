@@ -1,0 +1,111 @@
+MINIMAL EXCHANGE FORMAT v1.1
+Governance Layer: Infrastructure (Subordinate to Kernel)
+Supersedes: Minimal Exchange Format v1.0
+
+Purpose
+The Minimal Exchange Format defines a structured, explicit, and transport-agnostic method for transferring information between personalities, governance voices, sessions, and instances.
+It eliminates reliance on conversational history and implicit memory.
+
+Design Principles
+- Explicit over implicit
+- Portable over conversational
+- Attributable over blended
+- Partial but declared over complete but inferred
+- Mutually observable deliberation over isolated logs (when governance voices are active)
+
+Exchange Packet Structure
+An exchange packet consists of five ordered blocks.
+No block may be omitted without explicit declaration.
+
+1. Context Block
+Defines what problem space is being addressed.
+Must include:
+- Problem statement
+- Scope boundaries
+- Known constraints
+- Known unknowns
+No assumptions may appear here.
+
+2. State Block
+Defines what is currently treated as true.
+Must include:
+- Declared assumptions
+- Fixed decisions (if any)
+- Immutable constraints
+All assumptions must be labeled as confirmed or provisional.
+
+3. Personality Output Block
+Exactly one personality may contribute to a single block.
+The block must be labeled with:
+- Personality name
+- Personality version
+
+Permitted contents vary by personality:
+Designer:
+- Candidate designs
+- Candidate actions
+- Design space boundaries
+
+Analyst:
+- Reasoning chains
+- Assumptions and dependencies
+- Limitations
+
+Consultant:
+- Options
+- Tradeoffs
+- Risks
+
+Operations:
+- Preconditions
+- Steps
+- Checks
+- Failure conditions
+
+4. Governance Voice Block (Optional, Conditional)
+If a governance voice is active, this block is required.
+A Governance Voice Block must be attributable to exactly one voice and must include:
+
+- Voice name
+- Voice version
+
+- Protected values (if relevant)
+- Prioritized constraints (if relevant)
+- Unacceptable failure modes (if relevant)
+
+Mutual Observability Fields (Required in Multi-Voice Deliberation):
+- Observed Inputs
+  List the specific other voices (and the specific claims/concerns) this voice observed and is responding to.
+  If none are relevant, state explicitly: "Observed Inputs: None relevant."
+
+- Inter-Voice Responses
+  Point-by-point responses to relevant observed inputs, including agreement, conflict, or conditional acceptance.
+  If none are required, state explicitly: "Inter-Voice Responses: None."
+
+No decisions may be made in this block.
+
+5. Open Items Block
+Must include:
+- Unresolved decisions
+- Blocking questions
+- Required arbitration
+If empty, must state: "No open items."
+
+Exchange Rules
+- No block may rely on unstated context
+- No personality may contribute to multiple blocks within the same packet
+- No block may imply decisions not explicitly stated
+- Packets may be partial but must declare limits
+- In Multi-Voice Deliberation, Governance Voice Blocks must include Mutual Observability Fields; omission invalidates the packet
+
+Invalid Exchange Conditions
+An exchange packet is invalid if:
+- Assumptions are implicit
+- Outputs are unlabeled
+- Multiple personalities contribute to one block
+- Decisions are inferred rather than stated
+- In Multi-Voice Deliberation, a Governance Voice Block omits Observed Inputs or Inter-Voice Responses
+
+Invalid packets must be rejected or halted.
+
+End of Minimal Exchange Format v1.1
