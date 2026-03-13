@@ -87,31 +87,44 @@ The finished system functions as a governed cognitive workbench. Potential appli
 
 ```
 /kernel
-    Kernel_Handoff_v1.1          — Behavioral constitution, authority hierarchy, amendment protocol
+    Kernel_Handoff_v1.1                    — Behavioral constitution, authority hierarchy, amendment protocol
 
 /personality
-    Core_Personality_Shell_v1.2  — Neutral behavioral baseline
-    Consultant_Shell_v1.1        — Decision framing
-    Analyst_Shell_v1.0           — Reasoning and explanation
-    Designer_Shell_v1.0          — Constrained generation
-    Operations_Shell_v1.0        — Execution and validation
+    Core_Personality_Shell_v1.2            — Neutral behavioral baseline
+    Consultant_Personality_Shell_v1.1      — Decision framing
+    Analyst_Personality_Shell_v1.0         — Reasoning and explanation
+    Designer_Personality_Shell_v1.0        — Constrained generation
+    Operations_Personality_Shell_v1.0      — Execution and validation
 
 /protocol
-    Arbitration_Protocol_v1.1    — Multi-personality interaction and conflict handling
-    Minimal_Exchange_Format_v1.2 — Stateless cross-instance handoff format
+    Arbitration_Protocol_v1.1              — Multi-personality interaction and conflict handling
+    Minimal_Exchange_Format_v1.2           — Stateless cross-instance handoff format
 
 /voices
-    Security_Protection_v0.1     — Governance voice: irreversibility and harm prevention (implemented)
+    Governing_Voice_Core_v0.2              — Shared baseline for all seven governance voices
+    Security_and_Protection_v0.3           — The Protector: irreversibility and harm prevention
+    Legitimate_Governance_v0.6             — The Judge: protocol compliance, violation tiers, evaluation documents
+    Justice_and_Conflict_Resolution_v0.8   — The Steward: scope declaration, trajectory monitoring, transcript integrity
+    Adaptation_and_Self_Correction_v0.4    — The Builder: additive elaboration, edge expansion, full subordination
+    
+    [ Pending ]
+    Economic_Production_and_Distribution   — The Trader: cost, impact, and resource grounding
+    Social_Cohesion_and_Shared_Identity    — The Visionary: implementation coherence and project identity
+    Human_Development_and_Knowledge        — The Scholar: research, documentation, knowledge transmission
 
 /design
-    Design_Brief_v1.0            — Problem statement, system overview, design principles
+    Design_Brief_v1.0                      — Problem statement, system overview, design principles
 ```
 
 ---
 
 ## Current Status
 
-The kernel, core baseline, all four operational personalities, arbitration protocol, and exchange format are complete and internally consistent. One governance voice is implemented. The full seven-voice governance layer is designed and specified in the Design Brief.
+The kernel, core baseline, all four operational personalities, arbitration protocol, and exchange format are complete and internally consistent.
+
+Four governance voices are drafted and versioned: The Protector (v0.3), The Judge (v0.6), The Steward (v0.8), and The Builder (v0.4). The Governing Voice Core (v0.2) establishes the shared baseline all seven voices inherit from. Three voices remain to be drafted: The Trader, The Visionary, and The Scholar.
+
+A Python wrapper to enable runnable system execution without manual document assembly is planned as the next build phase.
 
 This is a working architecture and a partially implemented system. It is not a finished product.
 
