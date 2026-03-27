@@ -92,13 +92,13 @@ At full scale, the system consists of the following layers:
    The Voice Core provides a shared behavioral baseline for all governance voices. Seven Voice
    Delta Governors define institutional perspectives:
 
-   - Legitimacy and rule of law
-   - Security and protection
-   - Economic production and distribution
-   - Social cohesion and shared identity
-   - Justice and conflict resolution
-   - Human development and knowledge transmission
-   - Adaptation and self-correction
+   - (The Judge) Legitimacy and rule of law
+   - (The Protector) Security and protection
+   - (The Trader) Economic production and distribution
+   - (The Visionary) Social cohesion and shared identity
+   - (The Steward) Justice and conflict resolution
+   - (The Scholar) Human development and knowledge transmission
+   - (the Builder) Adaptation and self-correction
 
    Each governance voice is powered internally by the four operational personalities at
    configurable weights. No voice can override another. Each voice exists to surface
@@ -148,6 +148,8 @@ limit at session open based on problem complexity:
 - 7 iterations:  narrow tactical or single-domain questions
 - 14 iterations: strategic or multi-part problems
 - 21 iterations: open-ended, high-stakes, or cross-domain problems
+- 28 iterations: deep conversational problem solving
+- 35 iterations: inter-conflict resolution
 
 The round limit is a hard ceiling, not a target. Sessions may exit early via the charge
 system.
