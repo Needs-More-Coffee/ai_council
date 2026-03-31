@@ -64,6 +64,17 @@ No instance may modify, delete, or propose amendments to any document in its sta
 
 Documents are read-only for the duration of the session.
 
+### Template Documents
+
+Certain voice instances are provided with template documents alongside their governing documents at session open. Templates define the required format for documents that voice is authorized to produce.
+
+Templates are injected at session open alongside the relevant voice delta. The voice delta references its templates by name. Templates are read-only reference documents. They do not participate in governance conflicts and do not enter the authority ordering.
+
+Current templates:
+- `template_transcript.md` — injected with The Scholar's delta
+- `template_concept_key.md` — injected with The Scholar's delta
+- `template_violation_document.md` — injected with The Judge's delta
+
 ---
 
 *End of Kernel*

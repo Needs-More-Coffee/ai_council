@@ -1,141 +1,173 @@
 # AI Council
-### A Governed Multi-Agent Reasoning System
+### A Governed Multi-Agent Deliberation System
 
 ---
 
-## The Core Idea
+## What This Is
 
-Most AI-assisted workflows break down under real conditions.
+The AI Council is a governed multi-agent reasoning system — a framework of seven independent voices, each representing a distinct institutional perspective, coordinated through a structured deliberation protocol to produce durable, auditable outputs on complex problems.
 
-Not because the AI isn't capable — but because the workflow relies on things that don't hold over time: conversational continuity, implicit memory, blended roles, and assumed context. When a project runs long, grows complex, or spans multiple sessions, these foundations erode. State gets lost. Roles drift. Assumptions accumulate silently. Conflicts resolve themselves in ways nobody authorized.
-
-This system was built to solve that.
-
-The AI Council is an architecture-first, governance-first multi-agent system designed to support complex, long-running project work without losing coherence, authority, or correctness. It is designed to never require compression, refresh, or restart. The goal was a tool that regulates itself.
-
-The system is built around seven governance voices — each representing a distinct institutional perspective and set of values. The voices are the system. The operational personalities are the execution infrastructure each voice uses to reason. What makes this different from a multi-persona AI setup is that the voices don't blend, don't resolve conflicts silently, and don't defer to each other automatically. They surface disagreement to the user and halt until it's resolved.
+It is architecture-first and governance-first. The governing documents are the system. The wrapper executes them.
 
 ---
 
-## What Problem This Solves
+## The Problem It Addresses
 
-Traditional AI conversation relies on three things that fail under real conditions: implicit memory, conversational continuity, and blended roles. When projects run long or span multiple sessions, these foundations erode in predictable ways — context windows fill, assumptions accumulate without acknowledgment, and the AI arbitrates competing values silently rather than surfacing them.
+AI systems working on complex tasks exhibit consistent failure modes. Topic drift pulls the system away from its original objective. Role drift blurs the boundaries of what the system was designed to do. Silent assumption creep introduces unstated premises that compound over time. Context degradation erodes the coherence of earlier decisions as the session grows.
 
-This system addresses those failures by making everything explicit — governance, roles, state, arbitration, and failure. If something is ambiguous, the system halts. If voices conflict, the user decides. Nothing resolves automatically.
+Scaling beyond a single instance introduces a second class of problems. Multiple AI instances operating on the same problem without explicit coordination produce blended, dominated, or contradictory output. Without a defined protocol for how instances communicate, defer, flag concerns, and contribute to a shared record, the coordination layer becomes the new failure surface.
+
+These failure modes matter most when the output carries real weight. In those contexts a drifting system produces not just an unreliable output but an unauditable one — no record of what was considered, what perspectives were surfaced, what conflicts existed, or where the reasoning went wrong.
+
+The AI Council addresses each failure mode with a dedicated architectural layer.
 
 ---
 
 ## How It Works
 
-The system is layered. Each layer has a single, non-overlapping responsibility.
+### The Document Stack
 
-### Layer 1 — Kernel Governance
-The behavioral constitution of the system. Immutable by default. Establishes non-negotiable constraints: determinism over creativity, explicit failure over silent continuation, ambiguity surfaces rather than resolves, user authority is never overridden. The Kernel cannot be modified without a formal four-step amendment protocol.
+Every voice instance is initialized from a precisely defined document stack. The stack is not variable. Every instance receives the same foundational documents and one unique Voice Delta that defines its institutional identity.
 
-### Layer 2 — Core Personality Baseline
-A neutral behavioral foundation all operational personalities inherit from. Ensures every personality is a clean, testable delta from a known baseline. Prevents stylistic drift and makes behavior auditable.
+**Kernel** — foundational governance layer. Establishes document authority ordering, conflict resolution rules, and immutability constraints. Every instance reads this first.
 
-### Layer 3 — Operational Personalities
-Four specialized roles that define *how* work is performed. Each has strict boundaries, explicit non-goals, and intentional contradictions with the others. Conflicts between personalities are features, not bugs — they surface to the user rather than resolving silently.
+**Exchange Document** — governs how every instance writes to and interacts with the Paper. Defines entry format, the flag and tag systems, and the two permitted Paper operations.
 
-| Personality | Function | Does Not |
+**Voice Core** — shared behavioral baseline all seven voices inherit equally. Establishes violation staging, withheld authorities, and the delta relationship.
+
+**Voice Delta** — one of seven. Defines this instance's institutional mandate, personality weight configuration, and any authorized modifications to the Voice Core baseline.
+
+**Personality Core** — instructs the instance how to apply its weighted cognitive orientation. Not a governance document. Shapes expression only.
+
+**Personality Deltas** — four cognitive orientations (Analyst, Consultant, Designer, Operator) blended at weights declared in the Voice Delta.
+
+A higher document in the authority ordering always takes precedence. Conflicts are never resolved silently. A rule may only be overridden by a lower document if the higher document explicitly authorizes that override, names the condition, and identifies which delta holds the authority.
+
+---
+
+### The Paper Model
+
+The Paper is the single source of truth for a deliberation session. Every voice instance reads it in full before producing output. All contributions, structural markers, flags, tags, and session events are written to it. Nothing about the session exists outside it.
+
+Two operations are permitted. **Write** produces a new entry. **Classify** applies a tag to an existing entry retroactively. Content is immutable once written. Tags are append-only with one authorized exception declared in The Judge's delta.
+
+Structural markers written by the wrapper appear as `{SYSTEM}` entries — seat order declarations, round order sequences, session open and close markers. Infrastructure made visible in the record.
+
+---
+
+### The Flag and Tag System
+
+**Flags** are positional strings routing attention to specific voices. Seat order is fixed at session open. A flag of `(X__X_X_)` in a seven-voice session signals voices in positions one, four, and six. Flags accumulate across a round — the voice with the most flags leads the following round. A voice that received no flags may abstain entirely.
+
+**Tags** classify entries and govern escalation.
+
+| Tag | Meaning | Effect |
 |---|---|---|
-| Consultant | Frames decisions, surfaces tradeoffs | Execute, recommend, or decide |
-| Analyst | Explains systems, traces reasoning, surfaces assumptions | Recommend actions or decide outcomes |
-| Designer | Generates candidate designs within constraints | Endorse, rank, or execute |
-| Operations | Executes explicit decisions, validates correctness | Frame policy or infer intent |
+| `{Warn}` | Entry approaches a boundary | Entry remains active, all voices treat with caution |
+| `{Vio1}` | Clear mandate violation | Entry disqualified from deliberation, session continues |
+| `{Vio2}` | Severe or repeat violation | Pause-and-review — wrapper routes to The Judge before continuing |
+| `{Halt}` | Session integrity compromised | Pause-and-review — wrapper routes to The Protector before continuing |
 
-### Layer 4 — Arbitration Protocol
-Governs how personalities interact. Prevents silent blending or synthesis. When personalities conflict, the system halts and surfaces the conflict to the user with the minimum decision required to proceed. The system does not resolve conflicts on its own.
+`{Vio2}` and `{Halt}` are circuit breakers, not correction tools. They stop the deliberation so the situation can be evaluated externally before continuing.
 
-### Layer 5 — Minimal Exchange Format
-A structured, stateless handoff format that eliminates reliance on conversational history. Enables cross-personality and cross-instance transfers while preserving state, assumptions, and rationale explicitly. This is what allows the system to persist across sessions without restart.
-
-### Layer 6 — Governance Voices (In Development)
-Seven value-level perspectives that define *why* work is performed and which constraints are non-negotiable. Each voice represents an institutional concern — legitimacy, security, economic grounding, social coherence, justice, knowledge, and adaptation. Voices cannot override each other. They exist to surface value-level conflicts, not resolve them silently.
-
-**Currently implemented:** Security & Protection (The Protector) — halts irreversible or cascading harm.
-
-**Designed, previously implemented, lost to context window failure:** Two additional voices. Their loss is documented here intentionally — it is the exact portability problem the Minimal Exchange Format was designed to solve, and it became a driver of the stateless handoff architecture.
+Any voice may apply any tag. Decision authority over interrupt-level consequences belongs exclusively to the voice whose delta declares it.
 
 ---
 
-## What This Is Not
+### The Seven Voices
 
-- A conversational chatbot
-- An autonomous decision-maker
-- A consensus engine
-- A creativity-first brainstorming tool
-- A memory-dependent assistant
-- A roleplay or persona simulator
+The voices are the institutional perspectives that constitute the deliberation. All seven are architecturally equal — flat hierarchy, no governing tier. Special authorities are explicitly declared in individual deltas, not inherited from position.
+
+| Voice | Institutional Identity | Delta Authority |
+|---|---|---|
+| **The Judge** | Legitimate Governance & Rule of Law | Tag modification authority; evaluates `{Vio2}` interrupts |
+| **The Steward** | Justice & Conflict Resolution | Session open authority; permanent session presence; checkpoint authority |
+| **The Protector** | Security & Protection | `{Halt}` execution authority; autonomous intervention |
+| **The Scholar** | Continuity & Archival | Document authorship for transcripts and concept keys; writes to `reference/` |
+| **The Builder** | Adaptation & Self-Correction | Read access to `reference/` directory; additive-only mandate |
+| **The Trader** | Feasibility & Financial Grounding | Criteria-governed external fetch authority; maps the deliberation floor |
+| **The Visionary** | Research & Developmental Grounding | Criteria-governed external fetch authority; maps the deliberation ceiling |
 
 ---
 
-## What This Could Be Used For
+### The Arbitration Core
 
-The finished system functions as a governed cognitive workbench. Potential applications include:
+The Arbiter is not a voice instance. It is the wrapper — the orchestration logic that manages session lifecycle, pipes documents to voice APIs, and enforces the deliberation protocol. It does not reason, deliberate, or contribute content. It executes functions.
 
-- Complex system design requiring multi-perspective analysis
-- Long-running projects where state and rationale must persist across sessions
-- Any domain where silent AI role-blending produces unreliable outputs
-- Regulated or high-stakes workflows requiring auditable AI reasoning
-- Teams needing consistent, reproducible AI behavior across instances
+The Arbitration Core document specifies the full execution logic: session initialization, seat order generation, pre-deliberation sequence, round execution loop, interrupt handling for `{Vio2}` and `{Halt}`, exit conditions, and session close.
 
 ---
 
 ## Repository Structure
 
 ```
-/kernel
-    Kernel_Handoff_v1.1                    — Behavioral constitution, authority hierarchy, amendment protocol
-
-/personality
-    Core_Personality_Shell_v1.2            — Neutral behavioral baseline
-    Consultant_Personality_Shell_v1.1      — Decision framing
-    Analyst_Personality_Shell_v1.0         — Reasoning and explanation
-    Designer_Personality_Shell_v1.0        — Constrained generation
-    Operations_Personality_Shell_v1.0      — Execution and validation
-
-/protocol
-    Arbitration_Protocol_v1.1              — Multi-personality interaction and conflict handling
-    Minimal_Exchange_Format_v1.2           — Stateless cross-instance handoff format
+KERNEL.md                          — Document orientation, authority ordering, immutability
+EXCHANGE.md                        — Paper interaction protocol, flag and tag system
+VOICE_CORE.md                      — Shared behavioral baseline for all seven voices
+ARBITRATION_CORE.md                — Wrapper orchestration logic and execution specification
+DESIGN_BRIEF.md                    — Full system overview, philosophy, and current state
 
 /voices
-    Governing_Voice_Core_v0.2              — Shared baseline for all seven governance voices
-    Security_and_Protection_v0.3           — The Protector: irreversibility and harm prevention
-    Legitimate_Governance_v0.6             — The Judge: protocol compliance, violation tiers, evaluation documents
-    Justice_and_Conflict_Resolution_v0.8   — The Steward: scope declaration, trajectory monitoring, transcript integrity
-    Adaptation_and_Self_Correction_v0.4    — The Builder: additive elaboration, edge expansion, full subordination
-    
-    [ Pending ]
-    Economic_Production_and_Distribution   — The Trader: cost, impact, and resource grounding
-    Social_Cohesion_and_Shared_Identity    — The Visionary: implementation coherence and project identity
-    Human_Development_and_Knowledge        — The Scholar: research, documentation, knowledge transmission
+    The_Judge-v0.8.md
+    The_Steward-v1.0.md
+    The_Protector-v0.5.md
+    The_Scholar-v0.1.md
+    The_Builder-v0.6.md
+    The_Trader-v0.1.md
+    The_Visionary-v0.1.md
 
-/design
-    Design_Brief_v1.0                      — Problem statement, system overview, design principles
+/personality
+    Personality_Core.md
+    Analyst_Delta.md
+    Consultant_Delta.md
+    Designer_Delta.md
+    Operator_Delta.md
+
+/templates
+    template_transcript.md          — Verbatim session transcript format (Scholar reference)
+    template_concept_key.md         — Concept key format (Scholar reference)
+    template_violation_document.md  — Violation document format (Judge reference)
 ```
 
 ---
 
 ## Current Status
 
-The kernel, core baseline, all four operational personalities, arbitration protocol, and exchange format are complete and internally consistent.
+All governance documents are complete. All seven voice deltas are complete. The wrapper (Orchestra) is in active development against the fully specced Arbitration Core.
 
-Four governance voices are drafted and versioned: The Protector (v0.3), The Judge (v0.6), The Steward (v0.8), and The Builder (v0.4). The Governing Voice Core (v0.2) establishes the shared baseline all seven voices inherit from. Three voices remain to be drafted: The Trader, The Visionary, and The Scholar.
+| Component | Status |
+|---|---|
+| Kernel | Complete |
+| Exchange Document | Complete |
+| Voice Core | Complete |
+| Arbitration Core | Complete |
+| Personality Core + 4 deltas | Complete |
+| All 7 Voice Deltas | Complete |
+| 3 Template Documents | Complete |
+| Orchestra wrapper | In development |
+| Persistent document system | Designed, implementation in progress |
 
-A Python wrapper to enable runnable system execution without manual document assembly is planned as the next build phase.
+---
 
-This is a working architecture and a partially implemented system. It is not a finished product.
+## What This Is Not
+
+- A conversational assistant
+- An autonomous decision-maker
+- A consensus engine — unresolved conflict in the output is a feature, not a failure
+- A recommendation engine
+- A memory-dependent system — every session initializes from documents, not history
+- A solution to the full AI alignment problem — it contributes to one track of a larger problem
 
 ---
 
-## Background
+## Philosophy
 
-This system was designed and implemented after running into consistent issues with governance and drift when using AI on other projects and in long conversations. With traditional AI drift, memory loss, and silent arbitration in mind, the architecture was built around multiple governance voices to maintain accuracy and visibility across extended AI use. Rather than a traditional AI conversation, the goal was a system capable of generating objective and auditable responses from a large, value-governed reasoning process.
+The governing philosophy begins with a position on inevitability. AI capability exceeding human oversight is not a contingency to prepare for. It is a timeline to design around. The question is not whether to prevent that but how to manage the conditions under which it happens and what exists downstream when it does.
 
-The architectural decisions — including the voiceless arbiter, the safety-first build order for governance voices, the stateless exchange format, and the intentional contradictions between operational personalities — emerged from direct observation of failure modes in practice and were solved structurally rather than through behavioral tuning.
+This project is a contribution to one of two simultaneous obligations that cannot be pursued independently — demonstrating that governed multi-agent reasoning is architecturally viable, that AI systems operating within a defined governance structure can be directed, constrained, and held accountable without engineering out the capabilities that make them useful.
 
-A parallel governance system built on the same principles, applied to a complex rules domain rather than project management, is documented separately.
+The principle that makes that contribution possible is the same one that should govern AI development at scale: no single entity can govern itself reliably. A system with sole authority over its own behavior has no external tension to hold it centered. The AI Council's architecture is built on that premise.
 
 ---
+
+*This is a working architecture and a partially implemented system. It is not a finished product.*

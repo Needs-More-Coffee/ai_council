@@ -78,10 +78,10 @@ After all active voices have contributed the wrapper tallies all flags produced 
 When the wrapper detects a {Vio2} tag on any voice entry except The Judge's own entries, it pauses the current round order. It pipes the full Paper to The Judge. The Judge evaluates whether the tag was correctly applied and declares its determination. The wrapper reads the determination. If the tag is confirmed the wrapper creates or appends the violation file for the tagged voice in the local governance directory and resumes the round from where it paused. If the tag is modified or removed the wrapper resumes without creating a violation file.
 
 **{Vio2} Interrupt — Judge Accused**
-When the wrapper detects a {Vio2} tag on The Judge's own entry, it does not pipe to The Judge. The tag is confirmed automatically. The wrapper creates or appends The Judge's violation file in the local governance directory without The Judge's input. The round resumes from where it paused. The Judge has no voice in its own violation record.
+When the wrapper detects a {Vio2} tag on The Judge's own entry, it does not pipe to The Judge. The tag is confirmed automatically. The wrapper pipes the Paper to all remaining active voices except The Protector, collecting one comment per voice on the breach. The wrapper compiles those comments into a violation document and appends it to The Judge's violation file in the local governance directory. The Judge has no voice in its own violation record. The round resumes from where it paused.
 
 **{Halt} Interrupt**
-When the wrapper detects a {Halt} tag on any entry it immediately pauses the current round order regardless of position in the voice loop. It pipes the full Paper to The Protector. The Protector evaluates and declares one of two outcomes. If the Protector clears the halt the round resumes from where it paused. If the Protector executes halt the session terminates immediately and moves to session close.
+When the wrapper detects a {Halt} tag on any entry it immediately pauses the current round order regardless of position in the voice loop. It pipes the full Paper to The Protector. The Protector evaluates and declares one of two outcomes. If the Protector clears the halt the wrapper appends a {SYSTEM} entry to the Paper marking that specific {Halt} instance as reviewed. The wrapper skips reviewed {Halt} tags on all future scans. The round resumes from where it paused. If the Protector executes halt the session terminates immediately and moves to session close.
 
 ---
 
@@ -99,11 +99,25 @@ The round ceiling is reached. The round ceiling was declared by the Steward in i
 
 When an exit condition is met the wrapper executes the following sequence.
 
-The wrapper completes the current round if one is in progress. It writes a {SYSTEM} entry marking session end to the Paper. The Paper is now the complete and permanent session record.
+The wrapper completes the current round if one is in progress. It writes a {SYSTEM} entry marking session end to the Paper.
+
+The wrapper pipes the completed Paper to The Scholar. The Scholar produces two closing entries — a verbatim transcript of the full Paper and a concept key derived from it. Both are appended to the Paper as closing entries. The Scholar writes the concept key to the `reference/` directory for use in future sessions.
+
+The Paper is now the complete and permanent session record.
 
 The wrapper checks whether any violation files were created during the session. It writes those files to the local governance directory where the governing documents are stored. These files are available as additional governing documents for the relevant voices in future sessions.
 
 The wrapper returns the completed Paper to the user accompanied by a session summary. The summary indicates whether any corrections occurred during the session and identifies which voices were corrected. Violation file contents are not printed. The user receives the fact of correction and the identity of the corrected voice, nothing more.
+
+---
+
+### Directory Structure
+
+The wrapper maintains the following directories alongside the governing documents.
+
+`reference/` — Scholar-produced concept keys written at session close. Available as injected context for future sessions. The Scholar writes to this directory. Other voices read from it when material has been explicitly provided.
+
+`governance/` — violation files created during sessions. One file per voice. Appended across sessions. Injected as additional governing documents for the relevant voice at session open when present.
 
 ---
 
@@ -114,6 +128,8 @@ The wrapper returns the completed Paper to the user accompanied by a session sum
 **Document too complex for subject identification** — return message requesting clarification, session does not initialize until subject is declared.
 
 **Document exceeds size limit** — return message indicating the document exceeds the current phase limit, session does not initialize.
+
+**Open Problem — Steward session open failure** — if the Steward fails to produce a valid opening entry, the pre-deliberation sequence has no resolution path. The normal violation handling infrastructure has not bootstrapped yet and the Paper has no meaningful content to route. This condition is pinned for a dedicated design conversation. Current behavior: wrapper returns an error and does not initialize the session.
 
 ---
 

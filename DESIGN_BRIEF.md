@@ -71,7 +71,7 @@ For example, in a seven voice session with seat order set at open, a flag of (X_
 
 Flags accumulate across a round. At round close the wrapper tallies the total flags received by each voice during that round. The voice with the most flags speaks first in the following round. The voice with the second most speaks second. Ties are broken by seat order position. This means the deliberation order is not fixed — it is determined each round by what the voices collectively determined mattered most in the round that just completed. A voice that generated significant attention in round two will lead round three. A voice that generated none may abstain entirely.
 
-Tags classify entries. Four tags are defined in the current phase. {Warn} signals that an entry borders a mandate boundary but may be within scope — all voices treat the content with caution, the entry remains active. {Vio1} indicates a clear mandate violation — the entry is disqualified from deliberation but remains in the Paper for record keeping. {Vio2} indicates a second or severe violation — the entry is disqualified, the session is interrupted, and The Judge evaluates the tag before deliberation resumes. {Halt} indicates a violation so significant the session cannot continue — the wrapper immediately routes to The Protector for evaluation.
+Tags classify entries. Four tags are defined in the current phase. {Warn} signals that an entry borders a mandate boundary but may be within scope — all voices treat the content with caution, the entry remains active. {Vio1} indicates a clear mandate violation — the entry is disqualified from deliberation but remains in the Paper for record keeping. {Vio2} indicates a second or severe violation — the entry is disqualified, and the session enters pause-and-review: the wrapper routes to The Judge for evaluation before deliberation resumes. {Vio2} is not a correction tool. It stops the deliberation so the situation can be evaluated externally before continuing. {Halt} indicates a condition so significant the session cannot continue without external evaluation — the wrapper immediately routes to The Protector. {Halt} is also not a correction tool. It is a pause-and-review circuit breaker that protects the deliberation product from a session that can no longer produce trustworthy output.
 
 Any voice may apply any tag to any entry. The capability is universal. Decision authority over interrupt-level consequences belongs exclusively to the voice whose delta declares it — The Judge for {Vio2} evaluation, The Protector for {Halt} execution.
 
@@ -177,18 +177,27 @@ This system is explicitly not:
 - [COMPLETE] Kernel
 - [COMPLETE] Exchange Document
 - [COMPLETE] Voice Core
+- [COMPLETE] Arbitration Core
 - [COMPLETE] Personality Core
 - [COMPLETE] Analyst delta
 - [COMPLETE] Consultant delta
 - [COMPLETE] Designer delta
 - [COMPLETE] Operator delta
-- [COMPLETE] Arbitration Core
+- [COMPLETE] The Judge voice delta
+- [COMPLETE] The Steward voice delta
+- [COMPLETE] The Protector voice delta
+- [COMPLETE] The Scholar voice delta
+- [COMPLETE] The Builder voice delta
+- [COMPLETE] The Trader voice delta
+- [COMPLETE] The Visionary voice delta
+- [COMPLETE] Verbatim transcript template
+- [COMPLETE] Concept key template
+- [COMPLETE] Violation document template
 - [DESIGNED] Orchestra wrapper — Arbitration Core fully specced, implementation in progress
-- [DESIGNED] Seven voice deltas — institutional identities and delta breaks defined, documents not yet drafted
-- [DESIGNED] Persistent document system — architecture defined, not yet implemented
-- [PLANNED] Scholar reference document production
-- [PLANNED] Violation file accumulation across sessions
-- [PLANNED] External data fetching for Trader and Visionary
+- [DESIGNED] Persistent document system — reference/ and governance/ directories defined, implementation in progress
+- [DESIGNED] Violation file accumulation across sessions — template complete, wrapper logic defined
+- [DESIGNED] External data fetching for Trader and Visionary — criteria-governed model defined
+- [OPEN] Steward session open failure — no resolution path, pinned for dedicated design conversation
 
 ---
 

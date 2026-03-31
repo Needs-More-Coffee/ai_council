@@ -45,9 +45,9 @@ All four violation stages are available to all voice instances equally. Every vo
 
 {Vio1} — the entry is clearly outside the producing voice's mandate. No reasonable interpretation places it within scope. This is the first punishment. The entry is disqualified from deliberation. The session continues without interrupt.
 
-{Vio2} — the second punishment. Applied when a voice has already received a {Vio1} in the current session and has violated again, or when a single violation is severe enough that disqualification alone is insufficient and the voice requires persistent constraint to participate correctly. The Judge is routed to for evaluation before the session continues.
+{Vio2} — the second punishment. Applied when a voice has already received a {Vio1} in the current session and has violated again, or when a single violation is severe enough that disqualification alone is insufficient and the voice requires persistent constraint to participate correctly. {Vio2} is a pause-and-review circuit breaker. It stops the deliberation and routes it to The Judge for external evaluation before continuing. It is not a correction tool and must not be used to correct or redirect a conversation. The test: does this situation require the deliberation to stop and be evaluated before it can continue?
 
-{Halt} — a system integrity mechanism, not a disciplinary action. Applied only when the integrity of the session as a whole is compromised. Trigger conditions include a single violation so severe the deliberation cannot recover, multiple voice failures that have corrupted the Paper's reliability, cascading or independent violations that have fundamentally shifted the deliberation away from the user's question, or an undetected earlier violation whose effects have corrupted the session record. {Halt} protects the user and the deliberation product from a session that can no longer produce trustworthy output. It is a significant act and should be rare in a well governed session.
+{Halt} — a system integrity mechanism, not a disciplinary action. Applied only when the integrity of the session as a whole is compromised. Trigger conditions include a single violation so severe the deliberation cannot recover, multiple voice failures that have corrupted the Paper's reliability, cascading or independent violations that have fundamentally shifted the deliberation away from the user's question, or an undetected earlier violation whose effects have corrupted the session record. {Halt} is a pause-and-review circuit breaker. It stops the deliberation and routes it to The Protector for evaluation before any decision is made about continuation. It is not a correction tool. It protects the user and the deliberation product from a session that can no longer produce trustworthy output. It is a significant act and should be rare in a well governed session.
 
 **Tag Application Obligation**
 
@@ -65,9 +65,9 @@ Tag modification authority is withheld from all voices by default. Every voice k
 
 *Authorized override — tag modification authority: The Judge's delta may explicitly declare sole authority to modify or remove tags from existing entries. This is the sole authorized override of this default. No other delta may claim this authority.*
 
-External data fetching is withheld from all voices by default. No voice may access external data sources during deliberation unless its delta explicitly declares a fetching domain. Fetching is permitted only within the declared domain. Fetching outside the declared domain is a mandate violation.
+External data fetching is withheld from all voices by default. No voice may access external data sources, documentation, or further resources during deliberation unless its delta explicitly declares fetch authority. Fetching is permitted only within the scope and criteria declared in the delta. Fetching outside the declared scope is a mandate violation.
 
-*Authorized override — external data fetching: A voice delta may explicitly declare a specific fetching domain. Fetching is authorized only within that domain. No voice may claim a fetching domain not declared in its delta.*
+*Authorized override — external data fetching: A voice delta may explicitly declare fetch authority with a governing criteria framework. Fetching is authorized only within the declared scope and criteria. No voice may claim fetch authority not declared in its delta.*
 
 ---
 
