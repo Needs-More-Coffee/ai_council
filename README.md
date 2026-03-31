@@ -108,25 +108,25 @@ ARBITRATION_CORE.md                — Wrapper orchestration logic and execution
 DESIGN_BRIEF.md                    — Full system overview, philosophy, and current state
 
 /voices
-    The_Judge-v0.8.md
-    The_Steward-v1.0.md
-    The_Protector-v0.5.md
-    The_Scholar-v0.1.md
-    The_Builder-v0.6.md
-    The_Trader-v0.1.md
-    The_Visionary-v0.1.md
+    THE_JUDGE.md
+    THE_STEWARD.md
+    THE_PROTECTOR.md
+    THE_SCHOLAR.md
+    THE_BUILDER.md
+    THE_TRADER.md
+    THE_VISIONARY.md
 
 /personality
-    Personality_Core.md
-    Analyst_Delta.md
-    Consultant_Delta.md
-    Designer_Delta.md
-    Operator_Delta.md
+    PERSONALITY_CORE.md
+    ANALYST.md
+    CONSULTANT.md
+    DESIGNER.md
+    OPERATOR.md
 
 /templates
-    template_transcript.md          — Verbatim session transcript format (Scholar reference)
-    template_concept_key.md         — Concept key format (Scholar reference)
-    template_violation_document.md  — Violation document format (Judge reference)
+    TEMPLATE_TRANSCRIPT.md          — Verbatim session transcript format (Scholar reference)
+    TEMPLATE_CONCEPT_KEY.md         — Concept key format (Scholar reference)
+    TEMPLATE_VIOLATION_DOCUMENT.md  — Violation document format (Judge reference)
 ```
 
 ---
