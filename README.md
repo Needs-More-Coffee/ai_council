@@ -103,7 +103,6 @@ The Arbitration Core document specifies the full execution logic: session initia
 ```
 KERNEL.md                          — Document orientation, authority ordering, immutability
 EXCHANGE.md                        — Paper interaction protocol, flag and tag system
-VOICE_CORE.md                      — Shared behavioral baseline for all seven voices
 ARBITRATION_CORE.md                — Wrapper orchestration logic and execution specification
 DESIGN_BRIEF.md                    — Full system overview, philosophy, and current state
 
@@ -115,6 +114,7 @@ DESIGN_BRIEF.md                    — Full system overview, philosophy, and cur
     THE_BUILDER.md
     THE_TRADER.md
     THE_VISIONARY.md
+    VOICE_CORE.md
 
 /personality
     PERSONALITY_CORE.md

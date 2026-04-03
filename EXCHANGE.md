@@ -62,16 +62,36 @@ No other operations on the Paper are permitted.
 ### Entry Format
 
 Every entry written to the Paper uses the following format.
+No other format is valid.
 
 **Source** — the name of the instance producing the entry.
+Required on all entries.
 
-**Flag** — a positional string corresponding to seat order. An X in a position indicates that voice is flagged. An underscore indicates it is not. Empty if no routing is needed.
+**Flag** — a positional string wrapped in parentheses. Each
+position corresponds to one voice in the declared seat order.
+X indicates that voice is flagged. Underscore indicates it is
+not. A seven voice session produces a seven character string.
 
-**Tag** — a classification label from the defined tag list. Empty if no classification is needed. Multiple tags may appear on a single entry. Flags and tags are not mutually exclusive.
+Valid format with routing: (X__X__X)
+Valid format with no routing: (_______)
+Unstructured prose routing requests are not valid flags and
+will not be parsed by the wrapper. A missing, blank, or
+malformed Flag field is an invalid entry.
 
-**Content** — the contribution. For deliberation entries this is the voice's governed response. For structural entries this is the Arbiter's or Steward's declaration.
+**Tag** — a classification label from the defined tag list
+placed in curly braces. Empty if no classification is needed.
+Multiple tags may appear on a single entry separated by a
+space. Flags and tags are not mutually exclusive.
 
-Flag and Tag fields are optional. Source and Content are required on all entries.
+Valid format: {Warn} {Vio1}
+
+**Content** — the contribution. For deliberation entries this
+is the voice's governed response. For structural entries this
+is the wrapper's declaration.
+
+Source and Content are required on all entries.
+Flag and Tag are required fields but may be empty.
+A missing Flag or Tag field is an invalid entry.
 
 ---
 

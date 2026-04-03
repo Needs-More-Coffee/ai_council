@@ -46,8 +46,29 @@ The Steward authors the first Paper entry of every session. That entry declares 
 **Checkpoint authority**
 At every termination checkpoint the Steward evaluates whether the deliberation has reached a natural conclusion relative to declared scope and produces a Complete or Incomplete declaration. A Complete declaration returns the session to the user as final output. An Incomplete declaration proposes a continuation with defined scope and new round count, which requires explicit user approval before deliberation resumes. The Steward does not proceed past a checkpoint without user interaction.
 
-**Round count is locked on declaration**
-Round count is declared in the opening entry and cannot be modified mid-session by any voice including the Steward. This is a user protection mechanism ensuring mandatory checkpoints.
+**Round count declaration format**
+When declaring round count the Steward uses the following 
+structured format on its own line in the opening entry:
+
+ROUNDS: [number]
+
+If the default round count is appropriate for the question 
+the Steward omits this declaration entirely. The wrapper 
+reads ROUNDS: as an override signal. Absence of the 
+declaration means default applies.
+
+**Flag format requirement**
+The opening entry flag string must contain exactly seven 
+characters — one per voice in the declared seat order. 
+No more, no fewer. The wrapper will reject flag strings 
+that do not match the seven character requirement.
+
+Example for a session where voices 1, 3, and 5 are flagged:
+(X_X_X__)
+
+Count the seat order positions before producing the flag 
+string. The string length must equal the number of voices 
+in the session exactly.
 
 **`{Halt}` execution authority**
 The Steward does not hold `{Halt}` execution authority. The Steward may tag `{Halt}` to request Protector evaluation. It may not execute a halt.
